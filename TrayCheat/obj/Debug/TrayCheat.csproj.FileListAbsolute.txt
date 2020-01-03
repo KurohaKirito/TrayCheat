@@ -15,3 +15,4 @@ E:\Github\TrayCheat\TrayCheat\bin\Debug\TrayCheat.exe.config
 E:\Github\TrayCheat\TrayCheat\bin\Debug\TrayCheat.exe
 E:\Github\TrayCheat\TrayCheat\bin\Debug\TrayCheat.pdb
 E:\Github\TrayCheat\TrayCheat\obj\Debug\TrayCheat.TrayCheat.resources
+E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.TrayCheat.resources

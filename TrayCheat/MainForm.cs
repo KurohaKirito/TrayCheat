@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
 namespace TrayCheat
 {
@@ -12,66 +10,61 @@ namespace TrayCheat
             InitializeComponent();
         }
 
-        //初始化 360 按钮
+        //初始化 360 图标
         private void Init360_Click(object sender, EventArgs e)
         {
+            Tray.InitTray_360();
+        }
+
+        //显示 360 图标
+        private void Show360_Click(object sender, EventArgs e)
+        {
+            Tray.ShowTray_360();
+        }
+
+        //隐藏 360 图标
+        private void Hide360_Click(object sender, EventArgs e)
+        {
+            Tray.ShowBalloonTipText_1("360 已隐藏!");
+            Tray.HideTray_360();
+        }
+
+        //初始化 360 杀毒 图标
+        private void Init360bug_Click(object sender, EventArgs e)
+        {
+            Tray.InitTray_360bug();
+        }
+
+        //显示 360 杀毒 图标
+        private void Show360bug_Click(object sender, EventArgs e)
+        {
+            Tray.ShowTray_360bug();
+        }
+
+        //隐藏 360 杀毒 图标
+        private void Hide360bug_Click(object sender, EventArgs e)
+        {
+            Tray.ShowBalloonTipText_2("360 杀毒 已隐藏!");
+            Tray.HideTray_360bug();
+        }
+
+        //初始化 Tray Cheat 图标
+        private void InitTrayCheat_Click(object sender, EventArgs e)
+        {
             Tray.InitTray();
-            Tray.InitTray_1();
-            Tray.InitTray_2();
-
-            Tray.ShowTray_1();
-            Tray.ShowTray_2();
-        }
-    }
-
-    public class WindowsForm
-    {
-        [DllImport("user32.dll")]//需要导入该dll
-        public static extern bool ShowWindow(IntPtr hwnd, int nCmdShow);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
-        public static extern IntPtr GetForegroundWindow();
-
-        const int SW_Hide = 0;//隐藏任务栏图标  
-        const int SW_SHOWRESTORE = 1;//还原  
-        const int SW_SHOWMINIMIZED = 2; //{最小化, 激活}
-        const int SW_SHOWMAXIMIZED = 3;//最大化  
-        const int GWL_STYLE = -16;
-        const int WS_POPUP = 0x800000;
-        const uint SWP_SHOWWINDOW = 0x0040;
-
-        /// <summary>
-        /// 最大化   
-        /// </summary>
-        public static void OnClickMaximize(IntPtr hwnd)
-        {
-            ShowWindow(hwnd, SW_SHOWMAXIMIZED);
         }
 
-        /// <summary>
-        /// 隐藏任务栏图标   
-        /// </summary>
-        public static void OnClickHide(IntPtr hwnd)
+        //显示 Tray Cheat 图标
+        private void ShowTrayCheat_Click(object sender, EventArgs e)
         {
-            ShowWindow(hwnd, SW_Hide);
+            Tray.ShowTray();
         }
 
-        /// <summary>
-        /// 最小化
-        /// </summary>
-        /// <param name="hwnd"></param>
-        public static void OnClickMinimize(IntPtr hwnd)
+        //隐藏 Tray Cheat 图标
+        private void HideTrayCheat_Click(object sender, EventArgs e)
         {
-            ShowWindow(hwnd, SW_SHOWMINIMIZED);
-        }
-
-        /// <summary>
-        /// 还原窗口
-        /// </summary>
-        /// <param name="hwnd"></param>
-        public static void OnClickRestore(IntPtr hwnd)
-        {
-            ShowWindow(hwnd, SW_SHOWRESTORE);
+            Tray.ShowBalloonTipText("图标已隐藏!");
+            Tray.HideTray();
         }
     }
 }
