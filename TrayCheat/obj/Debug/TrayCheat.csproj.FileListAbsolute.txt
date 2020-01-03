@@ -1,0 +1,8 @@
+E:\WorkSpace\CSharp\TrayCheat\TrayCheat\bin\Debug\TrayCheat.exe.config
+E:\WorkSpace\CSharp\TrayCheat\TrayCheat\bin\Debug\TrayCheat.exe
+E:\WorkSpace\CSharp\TrayCheat\TrayCheat\bin\Debug\TrayCheat.pdb
+E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.csprojAssemblyReference.cache
+E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.Properties.Resources.resources
+E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.csproj.GenerateResource.cache
+E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.exe
+E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.pdb
