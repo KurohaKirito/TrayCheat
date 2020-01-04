@@ -25,7 +25,7 @@ namespace TrayCheat
         //隐藏 360 图标
         private void Hide360_Click(object sender, EventArgs e)
         {
-            Tray.ShowBalloonTipText_1("360 已隐藏!");
+            Tray.ShowBalloonTipText_360("360 已隐藏!");
             Tray.HideTray_360();
         }
 
@@ -44,7 +44,7 @@ namespace TrayCheat
         //隐藏 360 杀毒 图标
         private void Hide360bug_Click(object sender, EventArgs e)
         {
-            Tray.ShowBalloonTipText_2("360 杀毒 已隐藏!");
+            Tray.ShowBalloonTipText_360bug("360 杀毒 已隐藏!");
             Tray.HideTray_360bug();
         }
 
@@ -63,7 +63,7 @@ namespace TrayCheat
         //隐藏 Tray Cheat 图标
         private void HideTrayCheat_Click(object sender, EventArgs e)
         {
-            Tray.ShowBalloonTipText("图标已隐藏!");
+            Tray.ShowBalloonTipText("Tray Cheat 已隐藏!");
             Tray.HideTray();
         }
     }

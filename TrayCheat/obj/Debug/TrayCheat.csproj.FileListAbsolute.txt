@@ -6,7 +6,6 @@ E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.Properties.Resources
 E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.csproj.GenerateResource.cache
 E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.exe
 E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.pdb
-E:\Github\TrayCheat\TrayCheat\obj\Debug\TrayCheat.csprojAssemblyReference.cache
 E:\Github\TrayCheat\TrayCheat\obj\Debug\TrayCheat.Properties.Resources.resources
 E:\Github\TrayCheat\TrayCheat\obj\Debug\TrayCheat.csproj.GenerateResource.cache
 E:\Github\TrayCheat\TrayCheat\obj\Debug\TrayCheat.exe

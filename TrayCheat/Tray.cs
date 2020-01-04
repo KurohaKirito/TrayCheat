@@ -12,7 +12,7 @@ namespace TrayCheat
         private static readonly NotifyIcon notifyIcon_360 = new NotifyIcon();//托盘1
         private static readonly NotifyIcon notifyIcon_360bug = new NotifyIcon();//托盘2
 
-        //托盘图标的宽高
+        //托盘图标的大小
         private static readonly int _width = 128, _height = 128;
 
         //保存窗口句柄
@@ -22,34 +22,23 @@ namespace TrayCheat
         public static void InitTray()
         {
             currentWindowPtr = WindowsForm.GetForegroundWindow();//记住当前窗口句柄
-
-            notifyIcon.Text = "托盘欺诈工具";
-
-            //_notifyIcon1.Icon = new Icon(SystemIcons.Warning, _width, _height);//托盘图标
-            notifyIcon.Icon = CustomTrayIcon(Application.StartupPath + "/icon/tray_tool.ico", _width, _height);
-
+            notifyIcon.Text = @"托盘欺诈工具";
+            //notifyIcon.Icon = new Icon(SystemIcons.Warning, _width, _height);//系统图标
+            notifyIcon.Icon = CustomTrayIcon(Application.StartupPath + "/icon/tray_tool.ico", _width, _height);//自定义图标
             notifyIcon.MouseDoubleClick += NotifyIcon_MouseDoubleClick;//双击托盘图标 响应事件
         }
         public static void InitTray_360()
         {
             currentWindowPtr = WindowsForm.GetForegroundWindow();//记住当前窗口句柄
-
-            notifyIcon_360.Text = "这真的是 \"360 安全卫士\" 图标，真的！";
-
-            //_notifyIcon1.Icon = new Icon(SystemIcons.Warning, _width, _height);//托盘图标
+            notifyIcon_360.Text = @"这真的是 '360 安全卫士' 图标，真的！";
             notifyIcon_360.Icon = CustomTrayIcon(Application.StartupPath + "/icon/360.ico", _width, _height);
-
             notifyIcon_360.MouseDoubleClick += NotifyIcon_MouseDoubleClick;//双击托盘图标1 响应事件
         }
         public static void InitTray_360bug()
         {
             currentWindowPtr = WindowsForm.GetForegroundWindow();//记住当前窗口句柄
-
-            notifyIcon_360bug.Text = "这真的是 \"360 杀毒\" 图标，真的！";
-
-            //_notifyIcon.Icon = new Icon(SystemIcons.Warning, _width, _height);//托盘图标
+            notifyIcon_360bug.Text = @"这真的是 '360 杀毒' 图标，真的！";
             notifyIcon_360bug.Icon = CustomTrayIcon(Application.StartupPath + "/icon/360bug.ico", _width, _height);
-
             notifyIcon_360bug.MouseDoubleClick += NotifyIcon_MouseDoubleClick;//双击托盘图标2 响应事件
         }
         #endregion
@@ -61,26 +50,26 @@ namespace TrayCheat
         }
         public static void ShowTray_360()
         {
-            notifyIcon_360.Visible = true;//托盘按钮是否可见
+            notifyIcon_360.Visible = true;
         }
         public static void ShowTray_360bug()
         {
-            notifyIcon_360bug.Visible = true;//托盘按钮是否可见
+            notifyIcon_360bug.Visible = true;
         }
         #endregion
 
         #region 隐藏托盘图标
         public static void HideTray()
         {
-            notifyIcon.Visible = false;//隐藏此工具的任务栏图标
+            notifyIcon.Visible = false;//隐藏任务栏图标
         }
         public static void HideTray_360()
         {
-            notifyIcon_360.Visible = false;//托盘按钮是否可见
+            notifyIcon_360.Visible = false;
         }
         public static void HideTray_360bug()
         {
-            notifyIcon_360bug.Visible = false;//托盘按钮是否可见
+            notifyIcon_360bug.Visible = false;
         }
         #endregion
 
@@ -97,11 +86,13 @@ namespace TrayCheat
         //    Bitmap fitSizeBt = new Bitmap(bt, width, height);
         //    return Icon.FromHandle(fitSizeBt.GetHicon());
         //}
-        // 将 byte[] 转换成 Image
-        public static Image ByteArrayToImage(byte[] byteArrayIn)
+        public static Image ByteArrayToImage(byte[] byteArrayIn)// 将 byte[] 转换成 Image
         {
             if (byteArrayIn == null)
+            {
                 return null;
+            }
+
             using (System.IO.MemoryStream ms = new System.IO.MemoryStream(byteArrayIn))
             {
                 Image returnImage = Image.FromStream(ms);
@@ -111,38 +102,39 @@ namespace TrayCheat
         }
         #endregion
 
-        //取消双击事件的注册
+        #region 取消双击事件的注册
         public static void DestroyDoubleClick()
         {
             notifyIcon.MouseDoubleClick -= NotifyIcon_MouseDoubleClick;
         }
-        public static void DestroyDoubleClick_1()
+        public static void DestroyDoubleClick_360()
         {
             notifyIcon_360.MouseDoubleClick -= NotifyIcon_MouseDoubleClick;
         }
-        public static void DestroyDoubleClick_2()
+        public static void DestroyDoubleClick_360bug()
         {
             notifyIcon_360bug.MouseDoubleClick -= NotifyIcon_MouseDoubleClick;
         }
+        #endregion
 
         //显示 Windows 气泡消息
         public static void ShowBalloonTipText(string str)
         {
-            notifyIcon.BalloonTipText = str;// Windows 消息气泡显示内容
-            notifyIcon.ShowBalloonTip(2);//显示 Windows 消息气泡，并设置显示时间为 2s
+            //notifyIcon.BalloonTipText = str;// Windows 消息气泡显示内容
+            notifyIcon.ShowBalloonTip(2000, "Tray Cheat", str, ToolTipIcon.Info);//显示 Windows 消息气泡，并设置显示时间为 2s
         }
-        public static void ShowBalloonTipText_1(string str)
+        public static void ShowBalloonTipText_360(string str)
         {
-            notifyIcon_360.BalloonTipText = str;// Windows 消息气泡显示内容
-            notifyIcon_360.ShowBalloonTip(2);//显示 Windows 消息气泡，并设置显示时间为 2s
+            //notifyIcon_360.BalloonTipText = str;// Windows 消息气泡显示内容
+            notifyIcon_360.ShowBalloonTip(2000, "Tray Cheat", str, ToolTipIcon.Info);//显示 Windows 消息气泡，并设置显示时间为 2s
         }
-        public static void ShowBalloonTipText_2(string str)
+        public static void ShowBalloonTipText_360bug(string str)
         {
-            notifyIcon_360bug.BalloonTipText = str;// Windows 消息气泡显示内容
-            notifyIcon_360bug.ShowBalloonTip(2);//显示 Windows 消息气泡，并设置显示时间为 2s
+            //notifyIcon_360bug.BalloonTipText = str;// Windows 消息气泡显示内容
+            notifyIcon_360bug.ShowBalloonTip(2000, "Tray Cheat", str, ToolTipIcon.Info);//显示 Windows 消息气泡，并设置显示时间为 2s
         }
 
-        //双击任意一个托盘图标后，将程序窗口还原
+        //事件: 双击任意一个托盘图标后，将程序窗口还原
         private static void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -150,7 +142,7 @@ namespace TrayCheat
                 WindowsForm.OnClickRestore(currentWindowPtr);
             }
         }
-        public static void HideTrayIcon()
+        public static void HideTrayCheatWindows()
         {
             WindowsForm.OnClickHide(currentWindowPtr);//隐藏工具
         }
