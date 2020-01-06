@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
+using HZH_Controls.Forms;
 
 namespace TrayCheat
 {
@@ -120,18 +120,15 @@ namespace TrayCheat
         //显示 Windows 气泡消息
         public static void ShowBalloonTipText(string str)
         {
-            //notifyIcon.BalloonTipText = str;// Windows 消息气泡显示内容
-            notifyIcon.ShowBalloonTip(2000, "Tray Cheat", str, ToolTipIcon.Info);//显示 Windows 消息气泡，并设置显示时间为 2s
-        }
-        public static void ShowBalloonTipText_360(string str)
-        {
-            //notifyIcon_360.BalloonTipText = str;// Windows 消息气泡显示内容
-            notifyIcon_360.ShowBalloonTip(2000, "Tray Cheat", str, ToolTipIcon.Info);//显示 Windows 消息气泡，并设置显示时间为 2s
-        }
-        public static void ShowBalloonTipText_360bug(string str)
-        {
-            //notifyIcon_360bug.BalloonTipText = str;// Windows 消息气泡显示内容
-            notifyIcon_360bug.ShowBalloonTip(2000, "Tray Cheat", str, ToolTipIcon.Info);//显示 Windows 消息气泡，并设置显示时间为 2s
+            //使用 HZHControls 插件弹出气泡
+            FrmTips.ShowTips(Form.ActiveForm, str, 4000, true, ContentAlignment.BottomRight, null, TipsSizeMode.Medium, null, TipsState.Success);
+
+            // Windows 自带的消息气泡显示方法一
+            //notifyIcon_360.BalloonTipText = str;
+            //notifyIcon_360.ShowBalloonTip(2000);
+
+            // Windows 自带的消息气泡显示方法二
+            //notifyIcon_360bug.ShowBalloonTip(2000, "提示", str, ToolTipIcon.Info);
         }
 
         //事件: 双击任意一个托盘图标后，将程序窗口还原

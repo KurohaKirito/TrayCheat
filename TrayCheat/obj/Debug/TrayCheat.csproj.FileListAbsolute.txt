@@ -1,7 +1,6 @@
 E:\WorkSpace\CSharp\TrayCheat\TrayCheat\bin\Debug\TrayCheat.exe.config
 E:\WorkSpace\CSharp\TrayCheat\TrayCheat\bin\Debug\TrayCheat.exe
 E:\WorkSpace\CSharp\TrayCheat\TrayCheat\bin\Debug\TrayCheat.pdb
-E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.csprojAssemblyReference.cache
 E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.Properties.Resources.resources
 E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.csproj.GenerateResource.cache
 E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.exe
@@ -15,3 +14,6 @@ E:\Github\TrayCheat\TrayCheat\bin\Debug\TrayCheat.exe
 E:\Github\TrayCheat\TrayCheat\bin\Debug\TrayCheat.pdb
 E:\Github\TrayCheat\TrayCheat\obj\Debug\TrayCheat.TrayCheat.resources
 E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.TrayCheat.resources
+E:\WorkSpace\CSharp\TrayCheat\TrayCheat\bin\Debug\HZH_Controls.dll
+E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.csprojAssemblyReference.cache
+E:\WorkSpace\CSharp\TrayCheat\TrayCheat\obj\Debug\TrayCheat.csproj.CopyComplete
