@@ -139,9 +139,5 @@ namespace TrayCheat
                 WindowsForm.OnClickRestore(currentWindowPtr);
             }
         }
-        public static void HideTrayCheatWindows()
-        {
-            WindowsForm.OnClickHide(currentWindowPtr);//隐藏工具
-        }
     }
 }
