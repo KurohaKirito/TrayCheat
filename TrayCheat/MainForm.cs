@@ -6,53 +6,78 @@ namespace TrayCheat
 {
     public partial class TrayCheat : Form
     {
+        // 窗体构造函数
         public TrayCheat()
         {
             InitializeComponent();
         }
-        #region "初始化 360 卫士 图标" 按钮外观控制事件
-        private void Init360_MouseEnter(object sender, EventArgs e)
+
+        #region 探索学习过程
+        //窗体加载事件, 在窗体加载前触发, 此时窗体尚未加载
+        /*private void TrayCheat_Load(object sender, EventArgs e)
         {
-            Init360.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
+            MessageBox.Show("窗体加载中......", "提示");
+        }*/
+
+        //窗体激活事件, 每次窗体被激活(选中), 都会触发这个方法
+        /*private void TrayCheat_Activated(object sender, EventArgs e)
+        {
+            MessageBox.Show("窗体被激活", "提示");
+        }*/
+        #endregion
+
+        //当窗体第一次显示前, 会执行这个方法, 此时窗体已经加载完毕
+        private void TrayCheat_Shown(object sender, EventArgs e)
+        {
+            //MessageBox.Show("这是窗体的第一次显示", "提示");
+            Tray.InitTray();
+            Tray.InitTray_360();
+            Tray.InitTray_360bug();
         }
 
-        private void Init360_MouseDown(object sender, MouseEventArgs e)
+        #region "显示 360 卫士 图标" 按钮外观控制事件
+        private void Show360_MouseEnter(object sender, EventArgs e)
         {
-            Init360.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
+            Show360.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
         }
 
-        private void Init360_MouseUp(object sender, MouseEventArgs e)
+        private void Show360_MouseDown(object sender, MouseEventArgs e)
         {
-            Init360.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
+            Show360.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
         }
 
-        private void Init360_MouseLeave(object sender, EventArgs e)
+        private void Show360_MouseUp(object sender, MouseEventArgs e)
         {
-            Init360.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
+            Show360.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
+        }
+
+        private void Show360_MouseLeave(object sender, EventArgs e)
+        {
+            Show360.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
+        }
+        #endregion
+        #region "隐藏 360 卫士 图标" 按钮外观控制事件
+        private void Hide360_MouseEnter(object sender, EventArgs e)
+        {
+            Hide360.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
+        }
+
+        private void Hide360_MouseDown(object sender, MouseEventArgs e)
+        {
+            Hide360.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
+        }
+
+        private void Hide360_MouseUp(object sender, MouseEventArgs e)
+        {
+            Hide360.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
+        }
+
+        private void Hide360_MouseLeave(object sender, EventArgs e)
+        {
+            Hide360.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
         }
         #endregion
 
-        #region "初始化 360 杀毒 图标" 按钮外观控制事件
-        private void Init360bug_MouseEnter(object sender, EventArgs e)
-        {
-            Init360bug.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
-        }
-
-        private void Init360bug_MouseDown(object sender, MouseEventArgs e)
-        {
-            Init360bug.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
-        }
-
-        private void Init360bug_MouseUp(object sender, MouseEventArgs e)
-        {
-            Init360bug.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
-        }
-
-        private void Init360bug_MouseLeave(object sender, EventArgs e)
-        {
-            Init360bug.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
-        }
-        #endregion
         #region "显示 360 杀毒 图标" 按钮外观控制事件
         private void Show360bug_MouseEnter(object sender, EventArgs e)
         {
@@ -96,27 +121,6 @@ namespace TrayCheat
         }
         #endregion
 
-        #region "初始化 Tray Cheat 图标" 按钮外观控制事件
-        private void InitTrayCheat_MouseEnter(object sender, EventArgs e)
-        {
-            InitTrayCheat.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
-        }
-
-        private void InitTrayCheat_MouseDown(object sender, MouseEventArgs e)
-        {
-            InitTrayCheat.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
-        }
-
-        private void InitTrayCheat_MouseUp(object sender, MouseEventArgs e)
-        {
-            InitTrayCheat.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
-        }
-
-        private void InitTrayCheat_MouseLeave(object sender, EventArgs e)
-        {
-            InitTrayCheat.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
-        }
-        #endregion
         #region "显示 Tray Cheat 图标" 按钮外观控制事件
         private void ShowTrayCheat_MouseEnter(object sender, EventArgs e)
         {
@@ -178,12 +182,6 @@ namespace TrayCheat
         }
         #endregion
 
-        //初始化 360 图标
-        private void Init360_Click(object sender, EventArgs e)
-        {
-            Tray.InitTray_360();
-        }
-
         //显示 360 图标
         private void Show360_Click(object sender, EventArgs e)
         {
@@ -195,12 +193,6 @@ namespace TrayCheat
         {
             Tray.ShowBalloonTipText("360 已隐藏!");
             Tray.HideTray_360();
-        }
-
-        //初始化 360 杀毒 图标
-        private void Init360bug_Click(object sender, EventArgs e)
-        {
-            Tray.InitTray_360bug();
         }
 
         //显示 360 杀毒 图标
@@ -216,12 +208,6 @@ namespace TrayCheat
             Tray.HideTray_360bug();
         }
 
-        //初始化 Tray Cheat 图标
-        private void InitTrayCheat_Click(object sender, EventArgs e)
-        {
-            Tray.InitTray();
-        }
-
         //显示 Tray Cheat 图标
         private void ShowTrayCheat_Click(object sender, EventArgs e)
         {
@@ -235,52 +221,11 @@ namespace TrayCheat
             Tray.HideTray();
         }
 
-        private void Show360_MouseEnter(object sender, EventArgs e)
+        //隐藏窗口 按钮
+        private void HideWindow_Click(object sender, EventArgs e)
         {
-            Show360.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
+            Tray.HideWindow();
         }
-
-        private void Show360_MouseDown(object sender, MouseEventArgs e)
-        {
-            Show360.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
-        }
-
-        private void Show360_MouseUp(object sender, MouseEventArgs e)
-        {
-            Show360.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
-        }
-
-        private void Show360_MouseLeave(object sender, EventArgs e)
-        {
-            Show360.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
-        }
-
-        private void Hide360_MouseEnter(object sender, EventArgs e)
-        {
-            Hide360.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
-        }
-
-        private void Hide360_MouseDown(object sender, MouseEventArgs e)
-        {
-            Hide360.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
-        }
-
-        private void Hide360_MouseUp(object sender, MouseEventArgs e)
-        {
-            Hide360.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
-        }
-
-        private void Hide360_MouseLeave(object sender, EventArgs e)
-        {
-            Hide360.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
-        }
-
-
-
-
-
-        //隐藏窗口
-        //WindowsForm.OnClickHide(currentWindowPtr);//隐藏窗口
     }
 }
 

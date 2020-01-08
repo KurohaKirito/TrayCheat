@@ -29,17 +29,13 @@ namespace TrayCheat
         }
         public static void InitTray_360()
         {
-            currentWindowPtr = WindowsForm.GetForegroundWindow();//记住当前窗口句柄
             notifyIcon_360.Text = @"这真的是 '360 安全卫士' 图标，真的！";
             notifyIcon_360.Icon = CustomTrayIcon(Application.StartupPath + "/icon/360.ico", _width, _height);
-            notifyIcon_360.MouseDoubleClick += NotifyIcon_MouseDoubleClick;//双击托盘图标1 响应事件
         }
         public static void InitTray_360bug()
         {
-            currentWindowPtr = WindowsForm.GetForegroundWindow();//记住当前窗口句柄
             notifyIcon_360bug.Text = @"这真的是 '360 杀毒' 图标，真的！";
             notifyIcon_360bug.Icon = CustomTrayIcon(Application.StartupPath + "/icon/360bug.ico", _width, _height);
-            notifyIcon_360bug.MouseDoubleClick += NotifyIcon_MouseDoubleClick;//双击托盘图标2 响应事件
         }
         #endregion
 
@@ -73,12 +69,23 @@ namespace TrayCheat
         }
         #endregion
 
+        #region 隐藏窗口
+        public static void HideWindow()
+        {
+            WindowsForm.OnClickHide(currentWindowPtr);
+        }
+        #endregion
+
         #region 设置程序托盘图标
         private static Icon CustomTrayIcon(string iconPath, int width, int height)
         {
             Bitmap bt = new Bitmap(iconPath);
-            Bitmap fitSizeBt = new Bitmap(bt, width, height);
-            return Icon.FromHandle(fitSizeBt.GetHicon());
+
+            //当 using 代码块执行完之后, 会自动将 () 中的资源 Dispose (释放) 掉. 
+            using (Bitmap fitSizeBt = new Bitmap(bt, width, height))
+            {
+                return Icon.FromHandle(fitSizeBt.GetHicon());
+            }
         }
         //private static Icon CustomTrayIcon(Image img, int width, int height)
         //{
@@ -102,21 +109,6 @@ namespace TrayCheat
         }
         #endregion
 
-        #region 取消双击事件的注册
-        public static void DestroyDoubleClick()
-        {
-            notifyIcon.MouseDoubleClick -= NotifyIcon_MouseDoubleClick;
-        }
-        public static void DestroyDoubleClick_360()
-        {
-            notifyIcon_360.MouseDoubleClick -= NotifyIcon_MouseDoubleClick;
-        }
-        public static void DestroyDoubleClick_360bug()
-        {
-            notifyIcon_360bug.MouseDoubleClick -= NotifyIcon_MouseDoubleClick;
-        }
-        #endregion
-
         //显示 Windows 气泡消息
         public static void ShowBalloonTipText(string str)
         {
@@ -131,7 +123,7 @@ namespace TrayCheat
             //notifyIcon_360bug.ShowBalloonTip(2000, "提示", str, ToolTipIcon.Info);
         }
 
-        //事件: 双击任意一个托盘图标后，将程序窗口还原
+        //事件: 双击托盘图标，还原程序窗口
         private static void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
