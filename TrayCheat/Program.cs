@@ -16,7 +16,7 @@ namespace TrayCheat
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TrayCheat());
+            Application.Run(new MainForm());
         }
     }
 }

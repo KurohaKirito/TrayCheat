@@ -1,6 +1,6 @@
 ﻿namespace TrayCheat
 {
-    partial class TrayCheat
+    partial class MainForm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -29,19 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TrayCheat));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.Show360 = new System.Windows.Forms.Button();
             this.Show360bug = new System.Windows.Forms.Button();
             this.Hide360 = new System.Windows.Forms.Button();
             this.Hide360bug = new System.Windows.Forms.Button();
             this.ShowTrayCheat = new System.Windows.Forms.Button();
             this.HideTrayCheat = new System.Windows.Forms.Button();
-            this.notifyIcon_TrayCheat = new System.Windows.Forms.NotifyIcon(this.components);
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.Max = new System.Windows.Forms.ToolStripMenuItem();
-            this.Min = new System.Windows.Forms.ToolStripMenuItem();
+            this.NotifyIcon_TrayCheat = new System.Windows.Forms.NotifyIcon(this.components);
+            this.ContextMenuStrip_TrayCheat = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenu_Hide = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenu_Quit = new System.Windows.Forms.ToolStripMenuItem();
             this.HideWindow = new System.Windows.Forms.Button();
-            this.contextMenuStrip.SuspendLayout();
+            this.ToolStripMenu_Restore = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextMenuStrip_TrayCheat.SuspendLayout();
             this.SuspendLayout();
             // 
             // Show360
@@ -188,32 +189,36 @@
             this.HideTrayCheat.MouseLeave += new System.EventHandler(this.HideTrayCheat_MouseLeave);
             this.HideTrayCheat.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HideTrayCheat_MouseUp);
             // 
-            // notifyIcon_TrayCheat
+            // NotifyIcon_TrayCheat
             // 
-            this.notifyIcon_TrayCheat.ContextMenuStrip = this.contextMenuStrip;
-            this.notifyIcon_TrayCheat.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon_TrayCheat.Icon")));
-            this.notifyIcon_TrayCheat.Text = "notifyIcon1";
-            this.notifyIcon_TrayCheat.Visible = true;
+            this.NotifyIcon_TrayCheat.ContextMenuStrip = this.ContextMenuStrip_TrayCheat;
+            this.NotifyIcon_TrayCheat.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon_TrayCheat.Icon")));
+            this.NotifyIcon_TrayCheat.Text = "notifyIcon1";
+            this.NotifyIcon_TrayCheat.Visible = true;
+            this.NotifyIcon_TrayCheat.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_TrayCheat_MouseDoubleClick);
             // 
-            // contextMenuStrip
+            // ContextMenuStrip_TrayCheat
             // 
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Max,
-            this.Min});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(113, 48);
+            this.ContextMenuStrip_TrayCheat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenu_Restore,
+            this.ToolStripMenu_Hide,
+            this.ToolStripMenu_Quit});
+            this.ContextMenuStrip_TrayCheat.Name = "contextMenuStrip";
+            this.ContextMenuStrip_TrayCheat.Size = new System.Drawing.Size(181, 92);
             // 
-            // Max
+            // ToolStripMenu_Hide
             // 
-            this.Max.Name = "Max";
-            this.Max.Size = new System.Drawing.Size(112, 22);
-            this.Max.Text = "最大化";
+            this.ToolStripMenu_Hide.Name = "ToolStripMenu_Hide";
+            this.ToolStripMenu_Hide.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenu_Hide.Text = "隐藏";
+            this.ToolStripMenu_Hide.Click += new System.EventHandler(this.ToolStripMenu_Hide_Click);
             // 
-            // Min
+            // ToolStripMenu_Quit
             // 
-            this.Min.Name = "Min";
-            this.Min.Size = new System.Drawing.Size(112, 22);
-            this.Min.Text = "最小化";
+            this.ToolStripMenu_Quit.Name = "ToolStripMenu_Quit";
+            this.ToolStripMenu_Quit.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenu_Quit.Text = "退出";
+            this.ToolStripMenu_Quit.Click += new System.EventHandler(this.ToolStripMenu_Quit_Click);
             // 
             // HideWindow
             // 
@@ -240,7 +245,14 @@
             this.HideWindow.MouseLeave += new System.EventHandler(this.HideWindow_MouseLeave);
             this.HideWindow.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HideWindow_MouseUp);
             // 
-            // TrayCheat
+            // ToolStripMenu_Restore
+            // 
+            this.ToolStripMenu_Restore.Name = "ToolStripMenu_Restore";
+            this.ToolStripMenu_Restore.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenu_Restore.Text = "还原";
+            this.ToolStripMenu_Restore.Click += new System.EventHandler(this.ToolStripMenu_Restore_Click);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -256,26 +268,32 @@
             this.Controls.Add(this.Show360bug);
             this.Controls.Add(this.Show360);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "TrayCheat";
+            this.Name = "MainForm";
             this.Text = "TrayCheat";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_Closed);
             this.Shown += new System.EventHandler(this.TrayCheat_Shown);
-            this.contextMenuStrip.ResumeLayout(false);
+            this.ContextMenuStrip_TrayCheat.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
         private System.Windows.Forms.Button Show360;
         private System.Windows.Forms.Button Show360bug;
         private System.Windows.Forms.Button Hide360;
         private System.Windows.Forms.Button Hide360bug;
         private System.Windows.Forms.Button ShowTrayCheat;
         private System.Windows.Forms.Button HideTrayCheat;
-        private System.Windows.Forms.NotifyIcon notifyIcon_TrayCheat;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem Max;
-        private System.Windows.Forms.ToolStripMenuItem Min;
         private System.Windows.Forms.Button HideWindow;
+
+        private System.Windows.Forms.NotifyIcon NotifyIcon_TrayCheat;
+
+        private System.Windows.Forms.ContextMenuStrip ContextMenuStrip_TrayCheat;
+        
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenu_Quit;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenu_Hide;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenu_Restore;
     }
 }
 
