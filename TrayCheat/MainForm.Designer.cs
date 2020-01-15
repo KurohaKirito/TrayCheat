@@ -38,10 +38,11 @@
             this.HideTrayCheat = new System.Windows.Forms.Button();
             this.NotifyIcon_TrayCheat = new System.Windows.Forms.NotifyIcon(this.components);
             this.ContextMenuStrip_TrayCheat = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenu_Restore = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenu_Hide = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenu_Quit = new System.Windows.Forms.ToolStripMenuItem();
             this.HideWindow = new System.Windows.Forms.Button();
-            this.ToolStripMenu_Restore = new System.Windows.Forms.ToolStripMenuItem();
+            this.QuitWindow = new System.Windows.Forms.Button();
             this.ContextMenuStrip_TrayCheat.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -193,7 +194,7 @@
             // 
             this.NotifyIcon_TrayCheat.ContextMenuStrip = this.ContextMenuStrip_TrayCheat;
             this.NotifyIcon_TrayCheat.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon_TrayCheat.Icon")));
-            this.NotifyIcon_TrayCheat.Text = "notifyIcon1";
+            this.NotifyIcon_TrayCheat.Text = "Tray Cheat";
             this.NotifyIcon_TrayCheat.Visible = true;
             this.NotifyIcon_TrayCheat.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_TrayCheat_MouseDoubleClick);
             // 
@@ -204,19 +205,26 @@
             this.ToolStripMenu_Hide,
             this.ToolStripMenu_Quit});
             this.ContextMenuStrip_TrayCheat.Name = "contextMenuStrip";
-            this.ContextMenuStrip_TrayCheat.Size = new System.Drawing.Size(181, 92);
+            this.ContextMenuStrip_TrayCheat.Size = new System.Drawing.Size(101, 70);
+            // 
+            // ToolStripMenu_Restore
+            // 
+            this.ToolStripMenu_Restore.Name = "ToolStripMenu_Restore";
+            this.ToolStripMenu_Restore.Size = new System.Drawing.Size(100, 22);
+            this.ToolStripMenu_Restore.Text = "还原";
+            this.ToolStripMenu_Restore.Click += new System.EventHandler(this.ToolStripMenu_Restore_Click);
             // 
             // ToolStripMenu_Hide
             // 
             this.ToolStripMenu_Hide.Name = "ToolStripMenu_Hide";
-            this.ToolStripMenu_Hide.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenu_Hide.Size = new System.Drawing.Size(100, 22);
             this.ToolStripMenu_Hide.Text = "隐藏";
             this.ToolStripMenu_Hide.Click += new System.EventHandler(this.ToolStripMenu_Hide_Click);
             // 
             // ToolStripMenu_Quit
             // 
             this.ToolStripMenu_Quit.Name = "ToolStripMenu_Quit";
-            this.ToolStripMenu_Quit.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenu_Quit.Size = new System.Drawing.Size(100, 22);
             this.ToolStripMenu_Quit.Text = "退出";
             this.ToolStripMenu_Quit.Click += new System.EventHandler(this.ToolStripMenu_Quit_Click);
             // 
@@ -232,7 +240,7 @@
             this.HideWindow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.HideWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.HideWindow.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HideWindow.Location = new System.Drawing.Point(450, 250);
+            this.HideWindow.Location = new System.Drawing.Point(250, 250);
             this.HideWindow.Name = "HideWindow";
             this.HideWindow.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.HideWindow.Size = new System.Drawing.Size(150, 50);
@@ -245,12 +253,30 @@
             this.HideWindow.MouseLeave += new System.EventHandler(this.HideWindow_MouseLeave);
             this.HideWindow.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HideWindow_MouseUp);
             // 
-            // ToolStripMenu_Restore
+            // QuitWindow
             // 
-            this.ToolStripMenu_Restore.Name = "ToolStripMenu_Restore";
-            this.ToolStripMenu_Restore.Size = new System.Drawing.Size(180, 22);
-            this.ToolStripMenu_Restore.Text = "还原";
-            this.ToolStripMenu_Restore.Click += new System.EventHandler(this.ToolStripMenu_Restore_Click);
+            this.QuitWindow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.QuitWindow.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("QuitWindow.BackgroundImage")));
+            this.QuitWindow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.QuitWindow.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.QuitWindow.FlatAppearance.BorderSize = 0;
+            this.QuitWindow.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.QuitWindow.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.QuitWindow.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.QuitWindow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.QuitWindow.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QuitWindow.Location = new System.Drawing.Point(450, 250);
+            this.QuitWindow.Name = "QuitWindow";
+            this.QuitWindow.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.QuitWindow.Size = new System.Drawing.Size(150, 50);
+            this.QuitWindow.TabIndex = 10;
+            this.QuitWindow.Text = "退出程序";
+            this.QuitWindow.UseVisualStyleBackColor = false;
+            this.QuitWindow.Click += new System.EventHandler(this.QuitWindow_Click);
+            this.QuitWindow.MouseDown += new System.Windows.Forms.MouseEventHandler(this.QuitWindow_MouseDown);
+            this.QuitWindow.MouseEnter += new System.EventHandler(this.QuitWindow_MouseEnter);
+            this.QuitWindow.MouseLeave += new System.EventHandler(this.QuitWindow_MouseLeave);
+            this.QuitWindow.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HideWindow_MouseUp);
             // 
             // MainForm
             // 
@@ -260,6 +286,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(634, 411);
+            this.Controls.Add(this.QuitWindow);
             this.Controls.Add(this.HideWindow);
             this.Controls.Add(this.HideTrayCheat);
             this.Controls.Add(this.ShowTrayCheat);
@@ -294,6 +321,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenu_Quit;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenu_Hide;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenu_Restore;
+        private System.Windows.Forms.Button QuitWindow;
     }
 }
 

@@ -12,6 +12,12 @@ namespace TrayCheat
         private static readonly int icon_width = 128, icon_height = 128;//托盘图标的大小
         private static IntPtr currentWindowPtr;//保存窗口句柄
 
+        // 窗体构造函数
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+
         #region 程序初始化
 
         #region 探索学习过程
@@ -194,6 +200,25 @@ namespace TrayCheat
         }
         #endregion
 
+        #region "退出程序" 按钮外观控制事件
+        private void QuitWindow_MouseEnter(object sender, EventArgs e)
+        {
+            QuitWindow.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
+        }
+        private void QuitWindow_MouseLeave(object sender, EventArgs e)
+        {
+            QuitWindow.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
+        }
+        private void QuitWindow_MouseDown(object sender, MouseEventArgs e)
+        {
+            QuitWindow.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
+        }
+        private void QuitWindow_MouseUp(object sender, MouseEventArgs e)
+        {
+            QuitWindow.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
+        }
+        #endregion
+
         #endregion
 
         #region 程序主界面中的按钮事件
@@ -205,8 +230,11 @@ namespace TrayCheat
         //隐藏 360 图标
         private void Hide360_Click(object sender, EventArgs e)
         {
-            ShowBalloonTipText("360 已隐藏!");
-            notifyIcon_360.Visible = false;
+            if (notifyIcon_360.Visible == true)
+            {
+                ShowBalloonTipText("360 已隐藏!");
+                notifyIcon_360.Visible = false;
+            }
         }
 
         //显示 360 杀毒 图标
@@ -217,8 +245,11 @@ namespace TrayCheat
         //隐藏 360 杀毒 图标
         private void Hide360bug_Click(object sender, EventArgs e)
         {
-            ShowBalloonTipText("360 杀毒 已隐藏!");
-            notifyIcon_360bug.Visible = false;
+            if (notifyIcon_360bug.Visible == true)
+            {
+                ShowBalloonTipText("360 杀毒 已隐藏!");
+                notifyIcon_360bug.Visible = false;
+            }
         }
 
         //显示 Tray Cheat 图标
@@ -229,11 +260,14 @@ namespace TrayCheat
         //隐藏 Tray Cheat 图标
         private void HideTrayCheat_Click(object sender, EventArgs e)
         {
-            ShowBalloonTipText("Tray Cheat 已隐藏!");
-            NotifyIcon_TrayCheat.Visible = false;
+            if (NotifyIcon_TrayCheat.Visible == true)
+            {
+                ShowBalloonTipText("Tray Cheat 已隐藏!");
+                NotifyIcon_TrayCheat.Visible = false;
+            }
         }
 
-        //隐藏窗口到托盘栏 按钮
+        //隐藏窗口 按钮
         private void HideWindow_Click(object sender, EventArgs e)
         {
             if (notifyIcon_360.Visible == true ||
@@ -243,18 +277,18 @@ namespace TrayCheat
                 WindowsForm.OnClickHide(currentWindowPtr);
             }
         }
+
+        //退出程序 按钮
+        private void QuitWindow_Click(object sender, EventArgs e)
+        {
+            ApplicationQuit();
+        }
         #endregion
 
         #region 主程序的右上角 "最小化" "最大化" "关闭" 按钮的事件
         private void MainForm_Closed(object sender, FormClosedEventArgs e)
         {
-            //退出前把所有的图标显示关闭
-            notifyIcon_360.Visible = false;
-            notifyIcon_360bug.Visible = false;
-            NotifyIcon_TrayCheat.Visible = false;
-
-            Dispose(true);//释放资源
-            Application.Exit();//退出程序
+            ApplicationQuit();
         }
         #endregion
 
@@ -289,17 +323,9 @@ namespace TrayCheat
         //退出程序
         private void ToolStripMenu_Quit_Click(object sender, EventArgs e)
         {
-            //退出前把所有的图标显示关闭
-            notifyIcon_360.Visible = false;
-            notifyIcon_360bug.Visible = false;
-            NotifyIcon_TrayCheat.Visible = false;
-
-            Dispose(true);//释放资源
-            Application.Exit();//退出程序
+            ApplicationQuit();
         }
         #endregion
-
-        #region 通用方法
 
         #region 将图片文件转换为图标文件
         private static Icon CustomTrayIcon(string iconPath, int width, int height)
@@ -348,16 +374,20 @@ namespace TrayCheat
             // Windows 自带的消息气泡显示方法二
             //notifyIcon_360bug.ShowBalloonTip(2000, "提示", str, ToolTipIcon.Info);
         }
-
         #endregion
 
-        #endregion
-
-        // 窗体构造函数
-        public MainForm()
+        #region 退出程序
+        private void ApplicationQuit()
         {
-            InitializeComponent();
+            //退出前把所有的图标显示关闭
+            notifyIcon_360.Visible = false;
+            notifyIcon_360bug.Visible = false;
+            NotifyIcon_TrayCheat.Visible = false;
+
+            Dispose(true);//释放资源
+            Application.Exit();//退出程序
         }
+        #endregion
     }
 }
 
