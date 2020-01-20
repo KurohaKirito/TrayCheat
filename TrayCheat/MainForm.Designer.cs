@@ -43,6 +43,7 @@
             this.ToolStripMenu_Quit = new System.Windows.Forms.ToolStripMenuItem();
             this.HideWindow = new System.Windows.Forms.Button();
             this.QuitWindow = new System.Windows.Forms.Button();
+            this.Timer_IconFlick = new System.Windows.Forms.Timer(this.components);
             this.ContextMenuStrip_TrayCheat.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -278,6 +279,11 @@
             this.QuitWindow.MouseLeave += new System.EventHandler(this.QuitWindow_MouseLeave);
             this.QuitWindow.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HideWindow_MouseUp);
             // 
+            // Timer_IconFlick
+            // 
+            this.Timer_IconFlick.Interval = 50;
+            this.Timer_IconFlick.Tick += new System.EventHandler(this.Timer_IconFlick_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -322,6 +328,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenu_Hide;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenu_Restore;
         private System.Windows.Forms.Button QuitWindow;
+        private System.Windows.Forms.Timer Timer_IconFlick;
     }
 }
 

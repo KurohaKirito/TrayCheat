@@ -11,6 +11,28 @@ namespace TrayCheat
         private static readonly NotifyIcon notifyIcon_360bug = new NotifyIcon();//托盘 360 bug
         private static readonly int icon_width = 128, icon_height = 128;//托盘图标的大小
         private static IntPtr currentWindowPtr;//保存窗口句柄
+        private static readonly Icon icon_360 = CustomTrayIcon(Application.StartupPath + "/icon/360.ico", icon_width, icon_height);
+        private static readonly Icon icon_360bug = CustomTrayIcon(Application.StartupPath + "/icon/360bug.ico", icon_width, icon_height);
+
+        #region 图标的闪烁效果 以及 图标的旋转效果
+        public enum EffectFlickOrSpin { Effect_Flick, Effect_Spin }//枚举: 图标闪烁或者图标旋转
+        private static readonly EffectFlickOrSpin currentIconEffect = EffectFlickOrSpin.Effect_Spin;
+
+        public enum IconFlick { Icon_Tray, Icon_Tray_White }//枚举: 控制图标闪烁
+        public enum IconSpin { Icon_Tray_000, Icon_Tray_075, Icon_Tray_150, Icon_Tray_225, Icon_Tray_300, Icon_Tray_375 }//枚举: 控制图标旋转
+
+        private static readonly Icon icon_tray = CustomTrayIcon(Application.StartupPath + "/icon/tray.ico", icon_width, icon_height);
+        private static readonly Icon icon_tray_white = CustomTrayIcon(Application.StartupPath + "/icon/tray_white.ico", icon_width, icon_height);
+        private static IconFlick currentIconFlick = IconFlick.Icon_Tray;
+
+        private static readonly Icon icon_tray_000 = CustomTrayIcon(Application.StartupPath + "/icon/spin/tray_000.ico", icon_width, icon_height);
+        private static readonly Icon icon_tray_075 = CustomTrayIcon(Application.StartupPath + "/icon/spin/tray_075.ico", icon_width, icon_height);
+        private static readonly Icon icon_tray_150 = CustomTrayIcon(Application.StartupPath + "/icon/spin/tray_150.ico", icon_width, icon_height);
+        private static readonly Icon icon_tray_225 = CustomTrayIcon(Application.StartupPath + "/icon/spin/tray_225.ico", icon_width, icon_height);
+        private static readonly Icon icon_tray_300 = CustomTrayIcon(Application.StartupPath + "/icon/spin/tray_300.ico", icon_width, icon_height);
+        private static readonly Icon icon_tray_375 = CustomTrayIcon(Application.StartupPath + "/icon/spin/tray_375.ico", icon_width, icon_height);
+        private static IconSpin currentIconSpin = IconSpin.Icon_Tray_000;
+        #endregion
 
         // 窗体构造函数
         public MainForm()
@@ -41,12 +63,15 @@ namespace TrayCheat
             currentWindowPtr = WindowsForm.GetForegroundWindow();//获取窗口句柄, 必须在窗口被激活之后执行这句代码
 
             notifyIcon_360.Text = @"这真的是 '360 安全卫士' 图标，真的！";
-            notifyIcon_360.Icon = CustomTrayIcon(Application.StartupPath + "/icon/360.ico", icon_width, icon_height);
+            notifyIcon_360.Icon = icon_360;
             notifyIcon_360.MouseDoubleClick += NotifyIcon_TrayCheat_MouseDoubleClick;
 
             notifyIcon_360bug.Text = @"这真的是 '360 杀毒' 图标，真的！";
-            notifyIcon_360bug.Icon = CustomTrayIcon(Application.StartupPath + "/icon/360bug.ico", icon_width, icon_height);
+            notifyIcon_360bug.Icon = icon_360bug;
             notifyIcon_360bug.MouseDoubleClick += NotifyIcon_TrayCheat_MouseDoubleClick;
+
+            //打开定时器
+            Timer_IconFlick.Start();
         }
 
         #endregion
@@ -384,10 +409,80 @@ namespace TrayCheat
             notifyIcon_360bug.Visible = false;
             NotifyIcon_TrayCheat.Visible = false;
 
+            //关闭定时器
+            Timer_IconFlick.Stop();
+
             Dispose(true);//释放资源
             Application.Exit();//退出程序
         }
         #endregion
+
+        //特效定时器
+        private void Timer_IconFlick_Tick(object sender, EventArgs e)
+        {
+            switch (currentIconEffect)
+            {
+                case EffectFlickOrSpin.Effect_Flick:
+                    #region 闪烁效果
+                    if (icon_tray != null && icon_tray_white != null)//判断图标是否已经赋值
+                    {
+                        switch (currentIconFlick)
+                        {
+                            case IconFlick.Icon_Tray:
+                                NotifyIcon_TrayCheat.Icon = icon_tray_white;
+                                currentIconFlick = IconFlick.Icon_Tray_White;
+                                break;
+                            case IconFlick.Icon_Tray_White:
+                                NotifyIcon_TrayCheat.Icon = icon_tray;
+                                currentIconFlick = IconFlick.Icon_Tray;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    #endregion
+                    break;
+                case EffectFlickOrSpin.Effect_Spin:
+                    #region 旋转效果
+                    if (icon_tray_000 != null && icon_tray_075 != null && icon_tray_150 != null &&
+                        icon_tray_225 != null && icon_tray_300 != null && icon_tray_375 != null)//判断图标是否已经赋值
+                    {
+                        switch (currentIconSpin)
+                        {
+                            case IconSpin.Icon_Tray_000:
+                                NotifyIcon_TrayCheat.Icon = icon_tray_075;
+                                currentIconSpin = IconSpin.Icon_Tray_075;
+                                break;
+                            case IconSpin.Icon_Tray_075:
+                                NotifyIcon_TrayCheat.Icon = icon_tray_150;
+                                currentIconSpin = IconSpin.Icon_Tray_150;
+                                break;
+                            case IconSpin.Icon_Tray_150:
+                                NotifyIcon_TrayCheat.Icon = icon_tray_225;
+                                currentIconSpin = IconSpin.Icon_Tray_225;
+                                break;
+                            case IconSpin.Icon_Tray_225:
+                                NotifyIcon_TrayCheat.Icon = icon_tray_300;
+                                currentIconSpin = IconSpin.Icon_Tray_300;
+                                break;
+                            case IconSpin.Icon_Tray_300:
+                                NotifyIcon_TrayCheat.Icon = icon_tray_375;
+                                currentIconSpin = IconSpin.Icon_Tray_375;
+                                break;
+                            case IconSpin.Icon_Tray_375:
+                                NotifyIcon_TrayCheat.Icon = icon_tray_000;
+                                currentIconSpin = IconSpin.Icon_Tray_000;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    #endregion
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
 
