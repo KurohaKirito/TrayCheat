@@ -43,7 +43,8 @@
             this.ToolStripMenu_Quit = new System.Windows.Forms.ToolStripMenuItem();
             this.HideWindow = new System.Windows.Forms.Button();
             this.QuitWindow = new System.Windows.Forms.Button();
-            this.Timer_IconFlick = new System.Windows.Forms.Timer(this.components);
+            this.Timer_IconEffect = new System.Windows.Forms.Timer(this.components);
+            this.ICONEffect = new System.Windows.Forms.Button();
             this.ContextMenuStrip_TrayCheat.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -279,10 +280,35 @@
             this.QuitWindow.MouseLeave += new System.EventHandler(this.QuitWindow_MouseLeave);
             this.QuitWindow.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HideWindow_MouseUp);
             // 
-            // Timer_IconFlick
+            // Timer_IconEffect
             // 
-            this.Timer_IconFlick.Interval = 50;
-            this.Timer_IconFlick.Tick += new System.EventHandler(this.Timer_IconFlick_Tick);
+            this.Timer_IconEffect.Interval = 50;
+            this.Timer_IconEffect.Tick += new System.EventHandler(this.Timer_IconEffect_Tick);
+            // 
+            // ICONEffect
+            // 
+            this.ICONEffect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ICONEffect.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ICONEffect.BackgroundImage")));
+            this.ICONEffect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ICONEffect.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ICONEffect.FlatAppearance.BorderSize = 0;
+            this.ICONEffect.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.ICONEffect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.ICONEffect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.ICONEffect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ICONEffect.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ICONEffect.Location = new System.Drawing.Point(50, 250);
+            this.ICONEffect.Name = "ICONEffect";
+            this.ICONEffect.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.ICONEffect.Size = new System.Drawing.Size(150, 50);
+            this.ICONEffect.TabIndex = 11;
+            this.ICONEffect.Text = "提示当前图标效果";
+            this.ICONEffect.UseVisualStyleBackColor = false;
+            this.ICONEffect.Click += new System.EventHandler(this.ICONEffect_Click);
+            this.ICONEffect.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ICONEffect_MouseDown);
+            this.ICONEffect.MouseEnter += new System.EventHandler(this.ICONEffect_MouseEnter);
+            this.ICONEffect.MouseLeave += new System.EventHandler(this.ICONEffect_MouseLeave);
+            this.ICONEffect.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ICONEffect_MouseUp);
             // 
             // MainForm
             // 
@@ -292,6 +318,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(634, 411);
+            this.Controls.Add(this.ICONEffect);
             this.Controls.Add(this.QuitWindow);
             this.Controls.Add(this.HideWindow);
             this.Controls.Add(this.HideTrayCheat);
@@ -328,7 +355,8 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenu_Hide;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenu_Restore;
         private System.Windows.Forms.Button QuitWindow;
-        private System.Windows.Forms.Timer Timer_IconFlick;
+        private System.Windows.Forms.Timer Timer_IconEffect;
+        private System.Windows.Forms.Button ICONEffect;
     }
 }
 

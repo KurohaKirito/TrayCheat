@@ -7,31 +7,38 @@ namespace TrayCheat
 {
     public partial class MainForm : Form
     {
-        private static readonly NotifyIcon notifyIcon_360 = new NotifyIcon();//托盘 360
+        private static readonly NotifyIcon notifyIcon_360 = new NotifyIcon();//托盘 360 safe
         private static readonly NotifyIcon notifyIcon_360bug = new NotifyIcon();//托盘 360 bug
-        private static readonly int icon_width = 128, icon_height = 128;//托盘图标的大小
+        
         private static IntPtr currentWindowPtr;//保存窗口句柄
-        private static readonly Icon icon_360 = CustomTrayIcon(Application.StartupPath + "/icon/360.ico", icon_width, icon_height);
-        private static readonly Icon icon_360bug = CustomTrayIcon(Application.StartupPath + "/icon/360bug.ico", icon_width, icon_height);
+        private static readonly Icon icon_360 = new Icon(Application.StartupPath + "/icon/360.ico", SystemInformation.SmallIconSize);
+        private static readonly Icon icon_360bug = new Icon(Application.StartupPath + "/icon/360bug.ico", SystemInformation.SmallIconSize);
+
+        #region 存在 bug 的旧方法不再使用
+        //下面自定义图标文件的方法会导致图标模糊, 不再使用
+        //private const int icon_width = 16, icon_height = 16;//托盘图标的大小
+        //private static readonly Icon icon_360 = CustomTrayIcon(Application.StartupPath + "/icon/360.ico", icon_width, icon_height);
+        //private static readonly Icon icon_360bug = CustomTrayIcon(Application.StartupPath + "/icon/360bug.ico", icon_width, icon_height);
+        #endregion
 
         #region 图标的闪烁效果 以及 图标的旋转效果
-        public enum EffectFlickOrSpin { Effect_Flick, Effect_Spin }//枚举: 图标闪烁或者图标旋转
-        private static readonly EffectFlickOrSpin currentIconEffect = EffectFlickOrSpin.Effect_Spin;
+        public enum EffectFlickOrSpin { Effect_Spin, Effect_Flick, Effect_Still }//枚举: 旋转 闪烁 静止
+        private static EffectFlickOrSpin currentIconEffect = EffectFlickOrSpin.Effect_Spin;//默认是旋转
 
         public enum IconFlick { Icon_Tray, Icon_Tray_White }//枚举: 控制图标闪烁
+        private static IconFlick currentIconFlick = IconFlick.Icon_Tray_White;//标志当前的闪烁状态, 默认为: 透明
+        private static readonly Icon icon_tray = new Icon(Application.StartupPath + "/icon/tray.ico", SystemInformation.SmallIconSize);
+        private static readonly Icon icon_tray_white = new Icon(Application.StartupPath + "/icon/tray_white.ico", SystemInformation.SmallIconSize);
+        
         public enum IconSpin { Icon_Tray_000, Icon_Tray_075, Icon_Tray_150, Icon_Tray_225, Icon_Tray_300, Icon_Tray_375 }//枚举: 控制图标旋转
-
-        private static readonly Icon icon_tray = CustomTrayIcon(Application.StartupPath + "/icon/tray.ico", icon_width, icon_height);
-        private static readonly Icon icon_tray_white = CustomTrayIcon(Application.StartupPath + "/icon/tray_white.ico", icon_width, icon_height);
-        private static IconFlick currentIconFlick = IconFlick.Icon_Tray;
-
-        private static readonly Icon icon_tray_000 = CustomTrayIcon(Application.StartupPath + "/icon/spin/tray_000.ico", icon_width, icon_height);
-        private static readonly Icon icon_tray_075 = CustomTrayIcon(Application.StartupPath + "/icon/spin/tray_075.ico", icon_width, icon_height);
-        private static readonly Icon icon_tray_150 = CustomTrayIcon(Application.StartupPath + "/icon/spin/tray_150.ico", icon_width, icon_height);
-        private static readonly Icon icon_tray_225 = CustomTrayIcon(Application.StartupPath + "/icon/spin/tray_225.ico", icon_width, icon_height);
-        private static readonly Icon icon_tray_300 = CustomTrayIcon(Application.StartupPath + "/icon/spin/tray_300.ico", icon_width, icon_height);
-        private static readonly Icon icon_tray_375 = CustomTrayIcon(Application.StartupPath + "/icon/spin/tray_375.ico", icon_width, icon_height);
-        private static IconSpin currentIconSpin = IconSpin.Icon_Tray_000;
+        private static IconSpin currentIconSpin = IconSpin.Icon_Tray_000;//标志当前的旋转状态, 默认为: 未旋转
+        private static readonly Icon icon_tray_000 = new Icon(Application.StartupPath + "/icon/spin/tray_000.ico", SystemInformation.SmallIconSize);
+        private static readonly Icon icon_tray_075 = new Icon(Application.StartupPath + "/icon/spin/tray_075.ico", SystemInformation.SmallIconSize);
+        private static readonly Icon icon_tray_150 = new Icon(Application.StartupPath + "/icon/spin/tray_150.ico", SystemInformation.SmallIconSize);
+        private static readonly Icon icon_tray_225 = new Icon(Application.StartupPath + "/icon/spin/tray_225.ico", SystemInformation.SmallIconSize);
+        private static readonly Icon icon_tray_300 = new Icon(Application.StartupPath + "/icon/spin/tray_300.ico", SystemInformation.SmallIconSize);
+        private static readonly Icon icon_tray_375 = new Icon(Application.StartupPath + "/icon/spin/tray_375.ico", SystemInformation.SmallIconSize);
+        
         #endregion
 
         // 窗体构造函数
@@ -60,18 +67,34 @@ namespace TrayCheat
         private void TrayCheat_Shown(object sender, EventArgs e)
         {
             //MessageBox.Show("这是窗体的第一次显示", "提示");
-            currentWindowPtr = WindowsForm.GetForegroundWindow();//获取窗口句柄, 必须在窗口被激活之后执行这句代码
+            currentWindowPtr = WindowsForm.MyGetForegroundWindow();//获取窗口句柄, 必须在窗口被激活之后执行这句代码
 
-            notifyIcon_360.Text = @"这真的是 '360 安全卫士' 图标，真的！";
+            notifyIcon_360.Text = @"360安全卫士 - 安全防护中心完全开启";
             notifyIcon_360.Icon = icon_360;
             notifyIcon_360.MouseDoubleClick += NotifyIcon_TrayCheat_MouseDoubleClick;
 
-            notifyIcon_360bug.Text = @"这真的是 '360 杀毒' 图标，真的！";
+            notifyIcon_360bug.Text = @"360杀毒 - 文件系统实时防护已开启";
             notifyIcon_360bug.Icon = icon_360bug;
             notifyIcon_360bug.MouseDoubleClick += NotifyIcon_TrayCheat_MouseDoubleClick;
 
             //打开定时器
-            Timer_IconFlick.Start();
+            Timer_IconEffect.Start();
+
+            //修改按钮文本显示
+            switch (currentIconEffect)
+            {
+                case EffectFlickOrSpin.Effect_Spin:
+                    ICONEffect.Text = "当前图标效果: 旋转";
+                    break;
+                case EffectFlickOrSpin.Effect_Flick:
+                    ICONEffect.Text = "当前图标效果: 闪烁";
+                    break;
+                case EffectFlickOrSpin.Effect_Still:
+                    ICONEffect.Text = "当前图标效果: 无";
+                    break;
+                default:
+                    break;
+            }
         }
 
         #endregion
@@ -225,6 +248,25 @@ namespace TrayCheat
         }
         #endregion
 
+        #region "特效控制" 按钮外观控制事件
+        private void ICONEffect_MouseEnter(object sender, EventArgs e)
+        {
+            ICONEffect.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
+        }
+        private void ICONEffect_MouseLeave(object sender, EventArgs e)
+        {
+            ICONEffect.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
+        }
+        private void ICONEffect_MouseDown(object sender, MouseEventArgs e)
+        {
+            ICONEffect.BackgroundImage = Image.FromFile("sprite/button/Button Blue A.png");
+        }
+        private void ICONEffect_MouseUp(object sender, MouseEventArgs e)
+        {
+            ICONEffect.BackgroundImage = Image.FromFile("sprite/button/Button Red A.png");
+        }
+        #endregion
+
         #region "退出程序" 按钮外观控制事件
         private void QuitWindow_MouseEnter(object sender, EventArgs e)
         {
@@ -257,7 +299,7 @@ namespace TrayCheat
         {
             if (notifyIcon_360.Visible == true)
             {
-                ShowBalloonTipText("360 已隐藏!");
+                ShowBalloonTipText("360 安全卫士图标 已隐藏!");
                 notifyIcon_360.Visible = false;
             }
         }
@@ -272,7 +314,7 @@ namespace TrayCheat
         {
             if (notifyIcon_360bug.Visible == true)
             {
-                ShowBalloonTipText("360 杀毒 已隐藏!");
+                ShowBalloonTipText("360 杀毒图标 已隐藏!");
                 notifyIcon_360bug.Visible = false;
             }
         }
@@ -287,7 +329,7 @@ namespace TrayCheat
         {
             if (NotifyIcon_TrayCheat.Visible == true)
             {
-                ShowBalloonTipText("Tray Cheat 已隐藏!");
+                ShowBalloonTipText("Tray Cheat 图标 已隐藏!");
                 NotifyIcon_TrayCheat.Visible = false;
             }
         }
@@ -352,8 +394,9 @@ namespace TrayCheat
         }
         #endregion
 
-        #region 将图片文件转换为图标文件
-        private static Icon CustomTrayIcon(string iconPath, int width, int height)
+        #region 存在 bug 的旧方法不再使用
+        //下面自定义图标文件的方法会导致图标模糊, 不再使用
+        /*private static Icon CustomTrayIcon(string iconPath, int width, int height)
         {
             Bitmap bt = new Bitmap(iconPath);
 
@@ -363,7 +406,6 @@ namespace TrayCheat
                 return Icon.FromHandle(fitSizeBt.GetHicon());
             }
         }
-        /*
         private static Icon CustomTrayIcon(Image img, int width, int height)
         {
             Bitmap bt = new Bitmap(img);
@@ -410,38 +452,46 @@ namespace TrayCheat
             NotifyIcon_TrayCheat.Visible = false;
 
             //关闭定时器
-            Timer_IconFlick.Stop();
+            Timer_IconEffect.Stop();
 
             Dispose(true);//释放资源
             Application.Exit();//退出程序
         }
         #endregion
 
-        //特效定时器
-        private void Timer_IconFlick_Tick(object sender, EventArgs e)
+        //特效控制器
+        private void ICONEffect_Click(object sender, EventArgs e)
+        {
+            switch (currentIconEffect)//判断当前效果
+            {
+                case EffectFlickOrSpin.Effect_Spin:
+                    currentIconEffect = EffectFlickOrSpin.Effect_Flick;//旋转切换为闪烁
+                    ICONEffect.Text = "当前图标效果: 闪烁";//修改按钮文本显示
+                    Timer_IconEffect.Stop();//停止计时器
+                    Timer_IconEffect.Interval = 300;//设置定时器时间间隔
+                    Timer_IconEffect.Start();//开启计时器
+                    break;
+                case EffectFlickOrSpin.Effect_Flick:
+                    currentIconEffect = EffectFlickOrSpin.Effect_Still;//闪烁切换为静止
+                    ICONEffect.Text = "当前图标效果: 无";//修改按钮文本显示
+                    break;
+                case EffectFlickOrSpin.Effect_Still:
+                    currentIconEffect = EffectFlickOrSpin.Effect_Spin;//静止切换为旋转
+                    ICONEffect.Text = "当前图标效果: 旋转";//修改按钮文本显示
+                    Timer_IconEffect.Stop();//停止计时器
+                    Timer_IconEffect.Interval = 50;//设置定时器时间间隔
+                    Timer_IconEffect.Start();//开启计时器
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        //特效生成器
+        private void Timer_IconEffect_Tick(object sender, EventArgs e)
         {
             switch (currentIconEffect)
             {
-                case EffectFlickOrSpin.Effect_Flick:
-                    #region 闪烁效果
-                    if (icon_tray != null && icon_tray_white != null)//判断图标是否已经赋值
-                    {
-                        switch (currentIconFlick)
-                        {
-                            case IconFlick.Icon_Tray:
-                                NotifyIcon_TrayCheat.Icon = icon_tray_white;
-                                currentIconFlick = IconFlick.Icon_Tray_White;
-                                break;
-                            case IconFlick.Icon_Tray_White:
-                                NotifyIcon_TrayCheat.Icon = icon_tray;
-                                currentIconFlick = IconFlick.Icon_Tray;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    #endregion
-                    break;
                 case EffectFlickOrSpin.Effect_Spin:
                     #region 旋转效果
                     if (icon_tray_000 != null && icon_tray_075 != null && icon_tray_150 != null &&
@@ -476,6 +526,34 @@ namespace TrayCheat
                             default:
                                 break;
                         }
+                    }
+                    #endregion
+                    break;
+                case EffectFlickOrSpin.Effect_Flick:
+                    #region 闪烁效果
+                    if (icon_tray != null && icon_tray_white != null)//判断图标是否已经赋值
+                    {
+                        switch (currentIconFlick)
+                        {
+                            case IconFlick.Icon_Tray:
+                                NotifyIcon_TrayCheat.Icon = icon_tray_white;
+                                currentIconFlick = IconFlick.Icon_Tray_White;
+                                break;
+                            case IconFlick.Icon_Tray_White:
+                                NotifyIcon_TrayCheat.Icon = icon_tray;
+                                currentIconFlick = IconFlick.Icon_Tray;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    #endregion
+                    break;
+                case EffectFlickOrSpin.Effect_Still:
+                    #region 无效果
+                    if (icon_tray != null)//判断图标是否已经赋值
+                    {
+                        NotifyIcon_TrayCheat.Icon = icon_tray;
                     }
                     #endregion
                     break;
