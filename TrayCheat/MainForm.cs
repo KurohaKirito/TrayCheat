@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Media;
 using System.Drawing;
 using HZH_Controls.Forms;
 using System.Windows.Forms;
@@ -9,7 +10,9 @@ namespace TrayCheat
     {
         private static readonly NotifyIcon notifyIcon_360 = new NotifyIcon();//托盘 360 safe
         private static readonly NotifyIcon notifyIcon_360bug = new NotifyIcon();//托盘 360 bug
-        
+        //声音提示
+        private static readonly SoundPlayer soundMessage = new SoundPlayer(Application.StartupPath + "/sound/message.wav");
+
         private static IntPtr currentWindowPtr;//保存窗口句柄
         private static readonly Icon icon_360 = new Icon(Application.StartupPath + "/icon/360.ico", SystemInformation.SmallIconSize);
         private static readonly Icon icon_360bug = new Icon(Application.StartupPath + "/icon/360bug.ico", SystemInformation.SmallIconSize);
@@ -429,17 +432,26 @@ namespace TrayCheat
         #endregion
 
         #region 显示 Windows 气泡消息
-        public static void ShowBalloonTipText(string str)
+        private static void ShowBalloonTipText(string str)
         {
             //使用 HZHControls 插件弹出气泡
             FrmTips.ShowTips(Form.ActiveForm, str, 4000, true, ContentAlignment.BottomRight, null, TipsSizeMode.Medium, null, TipsState.Success);
+            //声音提示
+            soundMessage.Play();
+            //Windows 系统提示音
+            //SystemSounds.Asterisk.Play();
+            //SystemSounds.Beep.Play();
+            //SystemSounds.Exclamation.Play();
+            //SystemSounds.Hand.Play();
+            //SystemSounds.Question.Play();
 
             // Windows 自带的消息气泡显示方法一
             //notifyIcon_360.BalloonTipText = str;
             //notifyIcon_360.ShowBalloonTip(2000);
 
             // Windows 自带的消息气泡显示方法二
-            //notifyIcon_360bug.ShowBalloonTip(2000, "提示", str, ToolTipIcon.Info);
+            //notifyIcon_360.ShowBalloonTip(2000, "提示", str, ToolTipIcon.Warning);
+            //notifyIcon_360bug.ShowBalloonTip(2000, "提示", str, new ToolTipIcon());
         }
         #endregion
 
