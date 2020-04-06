@@ -1,0 +1,25 @@
+# 井号在 ignore 文件中, 表示注释
+# 忽略 .a 文件
+# *.a
+# 但否定忽略 lib.a, 尽管已经在前面忽略了 .a 文件
+# !lib.a
+# 仅在当前目录下忽略 TODO 文件， 但不包括子目录下的 subdir/TODO
+# /TODO
+# 忽略 build/ 文件夹下的所有文件
+# build/
+# 忽略 doc/notes.txt, 不包括 doc/server/arch.txt
+# doc/*.txt
+# 忽略所有的 .pdf 文件 在 doc/ directory 下的
+# doc/**/*.pdf
+# .gitignore 只能忽略没有被 track 的文件, 如果文件已经被纳入了版本管理, 则修改 .gitignore 是无效的
+# 解决方法是先把本地缓存删除, 然后重新提交
+
+
+# 忽略 .vs 文件夹下的所有内容
+.vs/
+# 忽略 TrayCheat/bin 下的所有文件
+TrayCheat/bin/
+# 忽略 TrayCheat/obj 下的所有文件
+TrayCheat/obj/
+
+
