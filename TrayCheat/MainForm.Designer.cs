@@ -87,7 +87,7 @@
             this.Show360bug.Location = new System.Drawing.Point(250, 50);
             this.Show360bug.Name = "Show360bug";
             this.Show360bug.Size = new System.Drawing.Size(150, 50);
-            this.Show360bug.TabIndex = 3;
+            this.Show360bug.TabIndex = 2;
             this.Show360bug.Text = "显示 360 杀毒图标";
             this.Show360bug.UseVisualStyleBackColor = false;
             this.Show360bug.Click += new System.EventHandler(this.Show360bug_Click);
@@ -159,7 +159,7 @@
             this.ShowTrayCheat.Location = new System.Drawing.Point(450, 50);
             this.ShowTrayCheat.Name = "ShowTrayCheat";
             this.ShowTrayCheat.Size = new System.Drawing.Size(150, 50);
-            this.ShowTrayCheat.TabIndex = 7;
+            this.ShowTrayCheat.TabIndex = 3;
             this.ShowTrayCheat.Text = "显示 Tray Cheat 图标";
             this.ShowTrayCheat.UseVisualStyleBackColor = false;
             this.ShowTrayCheat.Click += new System.EventHandler(this.ShowTrayCheat_Click);
@@ -183,7 +183,7 @@
             this.HideTrayCheat.Location = new System.Drawing.Point(450, 150);
             this.HideTrayCheat.Name = "HideTrayCheat";
             this.HideTrayCheat.Size = new System.Drawing.Size(150, 50);
-            this.HideTrayCheat.TabIndex = 8;
+            this.HideTrayCheat.TabIndex = 6;
             this.HideTrayCheat.Text = "隐藏 Tray Cheat 图标";
             this.HideTrayCheat.UseVisualStyleBackColor = false;
             this.HideTrayCheat.Click += new System.EventHandler(this.HideTrayCheat_Click);
@@ -246,7 +246,7 @@
             this.HideWindow.Name = "HideWindow";
             this.HideWindow.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.HideWindow.Size = new System.Drawing.Size(150, 50);
-            this.HideWindow.TabIndex = 9;
+            this.HideWindow.TabIndex = 8;
             this.HideWindow.Text = "隐藏窗口";
             this.HideWindow.UseVisualStyleBackColor = false;
             this.HideWindow.Click += new System.EventHandler(this.HideWindow_Click);
@@ -260,6 +260,7 @@
             this.QuitWindow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.QuitWindow.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("QuitWindow.BackgroundImage")));
             this.QuitWindow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.QuitWindow.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.QuitWindow.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.QuitWindow.FlatAppearance.BorderSize = 0;
             this.QuitWindow.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -271,7 +272,7 @@
             this.QuitWindow.Name = "QuitWindow";
             this.QuitWindow.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.QuitWindow.Size = new System.Drawing.Size(150, 50);
-            this.QuitWindow.TabIndex = 10;
+            this.QuitWindow.TabIndex = 9;
             this.QuitWindow.Text = "退出程序";
             this.QuitWindow.UseVisualStyleBackColor = false;
             this.QuitWindow.Click += new System.EventHandler(this.QuitWindow_Click);
@@ -301,7 +302,7 @@
             this.ICONEffect.Name = "ICONEffect";
             this.ICONEffect.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ICONEffect.Size = new System.Drawing.Size(150, 50);
-            this.ICONEffect.TabIndex = 11;
+            this.ICONEffect.TabIndex = 7;
             this.ICONEffect.Text = "提示当前图标效果";
             this.ICONEffect.UseVisualStyleBackColor = false;
             this.ICONEffect.Click += new System.EventHandler(this.ICONEffect_Click);
@@ -317,7 +318,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(634, 411);
+            this.ClientSize = new System.Drawing.Size(634, 361);
             this.Controls.Add(this.ICONEffect);
             this.Controls.Add(this.QuitWindow);
             this.Controls.Add(this.HideWindow);
@@ -327,9 +328,15 @@
             this.Controls.Add(this.Hide360);
             this.Controls.Add(this.Show360bug);
             this.Controls.Add(this.Show360);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainForm";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TrayCheat";
+            this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_Closed);
             this.Shown += new System.EventHandler(this.TrayCheat_Shown);
             this.ContextMenuStrip_TrayCheat.ResumeLayout(false);
