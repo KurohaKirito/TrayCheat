@@ -67,7 +67,7 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>EC191AE1E769BA15AA3CA99406B83DD255CDE63F</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>09CD1E4B359F452AEAE14F63598354EB74D695C9</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>TrayCheat_TemporaryKey.pfx</ManifestKeyFile>
@@ -123,6 +123,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="TrayCheat_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -21,5 +21,9 @@
 TrayCheat/bin/
 # 忽略 TrayCheat/obj 下的所有文件
 TrayCheat/obj/
+# 忽略 .package 下的所有文件
+.package/
+# 忽略 .exe 文件
+.package/*.exe
 
 
